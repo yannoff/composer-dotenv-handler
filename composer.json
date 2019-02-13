@@ -1,0 +1,27 @@
+{
+    "name": "yannoff/dotenv-handler",
+    "description": "Composer script to generate .env file against .env.dist template",
+    "keywords": ["env dotenv"],
+    "homepage": "https://github.com/yannoff/dotenv-handler",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Yannoff",
+            "homepage": "https://github.com/yannoff"
+        }
+    ],
+    "require": {
+        "php": ">=7.0",
+        "symfony/dotenv": "^4.2"
+    },
+    "require-dev": {
+        "composer/composer": "^1.0@dev",
+        "symfony/filesystem": "^2.3 || ^3 || ^4"
+    },
+    "autoload": {
+        "psr-4": { "Yannoff\\DotenvHandler\\": "src/" }
+    },
+    "extra": {
+        "class": "Yannoff\\DotenvHandler\\ScriptHandler"
+    }
+}
