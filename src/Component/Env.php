@@ -28,7 +28,7 @@ class Env
      *
      * @return Dotenv
      */
-    public static function getDotEnv()
+    protected static function getDotEnv()
     {
         if (null === self::$dotenv) {
             self::$dotenv = new Dotenv();

@@ -12,8 +12,7 @@ use Yannoff\DotenvHandler\Component\Env;
  */
 class Processor
 {
-    /** @var IOInterface */
-    private $io;
+    use IOTrait;
 
     /**
      * Processor constructor.
@@ -22,7 +21,7 @@ class Processor
      */
     public function __construct(IOInterface $io)
     {
-        $this->io = $io;
+        $this->setIO($io);
     }
 
     /**
@@ -34,32 +33,31 @@ class Processor
 
         $exists = is_file($realFile);
 
-        $parser = new Env();
-
         $action = $exists ? 'Updating' : 'Creating';
 
-        $this->io->write(sprintf('<info>%s the "%s" file</info>', $action, $realFile));
+        $this->printf('<info>%s the "%s" file</info>', $action, $realFile);
 
         // Find the expected params
         $distFile = $config['dist-file'];
-
-        $expectedValues = $parser->parse(file_get_contents($distFile), $distFile);
+        $distData = $this->load($distFile);
+        $expectedValues = Env::parse($distData, $distFile);
         $expectedParams = (array) $expectedValues;
 
         // find the actual params
         $actualValues = [];
         if ($exists) {
-            $existingValues = $parser->parse(file_get_contents($realFile), $realFile);
+            $realData = $this->load($realFile);
+            $existingValues = Env::parse($realData, $realFile);
 
             if (!is_array($existingValues)) {
-                throw new \InvalidArgumentException(sprintf('The existing "%s" file does not contain an array', $realFile));
+                throw new RuntimeException('The existing "%s" file does not contain an array', $realFile);
             }
             $actualValues = array_merge($actualValues, $existingValues);
         }
 
         $actualValues = $this->processParams($config, $expectedParams, (array) $actualValues);
 
-        file_put_contents($realFile, "# This file is auto-generated during the composer install\n" . $parser->dump($actualValues) . "\n");
+        $this->save($realFile, Env::dump($actualValues));
     }
 
     /**
@@ -128,15 +126,25 @@ class Processor
 
             if (!$isStarted) {
                 $isStarted = true;
-                $this->io->write('<comment>Some environment variables are missing. Please provide them.</comment>');
+                $this->printf('<comment>Some environment variables are missing. Please provide them.</comment>');
             }
 
             $default = $message;
-            $value = $this->io->ask(sprintf('<question>%s</question> (<comment>%s</comment>): ', $key, $default), $default);
+            $value = $this->askf('<question>%s</question>: ',$default, $key, $default);
 
             $actualParams[$key] = $value;
         }
 
         return $actualParams;
+    }
+
+    protected function save($file, $data)
+    {
+        file_put_contents($file, "# This file is auto-generated during the composer install\n" . $data . "\n");
+    }
+
+    protected function load($file)
+    {
+        return file_get_contents($file);
     }
 }
