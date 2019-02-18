@@ -7,7 +7,7 @@ Composer script to handle `.env` file maintenance, based upon the concept of the
 First you must require the package:
 
 ```bash
-$ composer require yannoff/dotenv-handler
+$ composer require yannoff/composer-dotenv-handler
 ```
 
 Then, set up your `composer.json` accordingly, as in the following example:
