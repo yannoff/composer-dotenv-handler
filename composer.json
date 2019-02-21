@@ -1,7 +1,7 @@
 {
     "name": "yannoff/composer-dotenv-handler",
     "description": "Composer script to generate .env file against .env.dist template",
-    "keywords": ["env dotenv composer"],
+    "keywords": ["env", "dotenv", "composer"],
     "homepage": "https://github.com/yannoff/composer-dotenv-handler",
     "license": "MIT",
     "authors": [

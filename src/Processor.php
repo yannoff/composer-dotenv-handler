@@ -30,6 +30,7 @@ class Processor
     public function processFile(array $config)
     {
         $realFile = $config['file'];
+        $distFile = $config['dist-file'];
 
         $exists = is_file($realFile);
 
@@ -38,7 +39,6 @@ class Processor
         $this->printf('<info>%s the "%s" file</info>', $action, $realFile);
 
         // Find the expected params
-        $distFile = $config['dist-file'];
         $distData = $this->load($distFile);
         $expectedValues = Env::parse($distData, $distFile);
         $expectedParams = (array) $expectedValues;
@@ -69,42 +69,18 @@ class Processor
      */
     private function processParams(array $config, array $expectedParams, array $actualParams)
     {
-        $keepOutdatedParams = false;
-        if (isset($config['keep-outdated'])) {
-            $keepOutdatedParams = (boolean) $config['keep-outdated'];
-        }
+        $keepOutdatedParams = (boolean) $config['keep-outdated'];
 
         if (!$keepOutdatedParams) {
             $actualParams = array_intersect_key($actualParams, $expectedParams);
         }
 
-        $envMap = empty($config['env-map']) ? array() : (array) $config['env-map'];
-
-        // Add the params coming from the environment values
-        $actualParams = array_replace($actualParams, $this->getEnvValues($envMap));
-
         return $this->getParams($expectedParams, $actualParams);
     }
 
     /**
-     * @param array $envMap
+     * Build params array, prompting for user to give the missing values
      *
-     * @return array
-     */
-    private function getEnvValues(array $envMap)
-    {
-        $params = array();
-        foreach ($envMap as $param => $env) {
-            $value = getenv($env);
-            if ($value) {
-                $params[$param] = $value;
-            }
-        }
-
-        return $params;
-    }
-
-    /**
      * @param array $expectedParams
      * @param array $actualParams
      *
@@ -138,11 +114,24 @@ class Processor
         return $actualParams;
     }
 
+    /**
+     * Save data to the given file
+     *
+     * @param string $file Absolute or relative filename
+     * @param string $data String representation of the data
+     */
     protected function save($file, $data)
     {
         file_put_contents($file, "# This file is auto-generated during the composer install\n" . $data . "\n");
     }
 
+    /**
+     * Load string content of the given file
+     *
+     * @param string $file Absolute or relative filename
+     *
+     * @return string
+     */
     protected function load($file)
     {
         return file_get_contents($file);
