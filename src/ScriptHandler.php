@@ -1,4 +1,11 @@
 <?php
+/**
+ * This file is part of the yannoff/composer-dotenv-handler project
+ *
+ * @copyright 2019 - Yannoff
+ * @licence   MIT License
+ * @author    Yannoff (https://github.com/yannoff)
+ */
 
 namespace Yannoff\DotenvHandler;
 

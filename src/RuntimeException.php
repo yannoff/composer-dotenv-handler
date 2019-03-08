@@ -1,15 +1,17 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: yann
- * Date: 16/02/19
- * Time: 23:02
+ * This file is part of the yannoff/composer-dotenv-handler project
+ *
+ * @copyright 2019 - Yannoff
+ * @licence   MIT License
+ * @author    Yannoff (https://github.com/yannoff)
  */
 
 namespace Yannoff\DotenvHandler;
 
 /**
  * Class RuntimeException
+ *
  * @package Yannoff\DotenvHandler
  */
 class RuntimeException extends \RuntimeException

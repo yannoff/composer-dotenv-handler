@@ -1,9 +1,10 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: yann
- * Date: 14/02/19
- * Time: 11:49
+ * This file is part of the yannoff/composer-dotenv-handler project
+ *
+ * @copyright 2019 - Yannoff
+ * @licence   MIT License
+ * @author    Yannoff (https://github.com/yannoff)
  */
 
 namespace Yannoff\DotenvHandler\Component;
@@ -15,7 +16,7 @@ use Symfony\Component\Dotenv\Exception\FormatException;
  * Class Env
  * DotEnv data manipulation class
  *
- * @package Yannoff\Yaml\Component
+ * @package Yannoff\DotenvHandler
  */
 class Env
 {

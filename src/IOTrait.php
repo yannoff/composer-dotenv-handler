@@ -1,9 +1,10 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: yann
- * Date: 16/02/19
- * Time: 22:15
+ * This file is part of the yannoff/composer-dotenv-handler project
+ *
+ * @copyright 2019 - Yannoff
+ * @licence   MIT License
+ * @author    Yannoff (https://github.com/yannoff)
  */
 
 namespace Yannoff\DotenvHandler;
@@ -12,6 +13,7 @@ use Composer\IO\IOInterface;
 
 /**
  * Trait IOTrait
+ *
  * @package Yannoff\DotenvHandler
  */
 trait IOTrait
