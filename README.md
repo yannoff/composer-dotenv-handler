@@ -1,5 +1,9 @@
 # yannoff/dotenv-handler
 
+[![Latest Stable Version](https://poser.pugx.org/yannoff/composer-dotenv-handler/v/stable)](https://packagist.org/packages/yannoff/composer-dotenv-handler)
+[![Total Downloads](https://poser.pugx.org/yannoff/composer-dotenv-handler/downloads)](https://packagist.org/packages/yannoff/composer-dotenv-handler)
+[![License](https://poser.pugx.org/yannoff/composer-dotenv-handler/license)](https://packagist.org/packages/yannoff/composer-dotenv-handler)
+
 Composer script to handle `.env` file maintenance, based upon the concept of the popular [incenteev/composer-parameter-handler](https://github.com/Incenteev/ParameterHandler) package.
 
 ## Usage
