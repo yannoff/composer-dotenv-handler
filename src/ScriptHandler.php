@@ -32,7 +32,7 @@ class ScriptHandler
 
         $processor = new Processor($event->getIO());
 
-        $config = array_merge(self::getDefaults(), $extras[self::EXTRA_CONFIG_KEY] ?? []);
+        $config = array_merge(self::getDefaults(), self::extractConfig($extras));
 
         $processor->processFile($config);
     }
@@ -49,5 +49,21 @@ class ScriptHandler
             'dist-file' => '.env.dist',
             'keep-outdated' => true,
         ];
+    }
+
+    /**
+     * Extract dotenv-handler config from the extra config section
+     *
+     * @param array $extras The whole composer.json "extra" section
+     *
+     * @return array The config or an empty array if no config found
+     */
+    protected static function extractConfig($extras)
+    {
+        if (array_key_exists(self::EXTRA_CONFIG_KEY, $extras)) {
+            return $extras[self::EXTRA_CONFIG_KEY];
+        }
+
+        return [];
     }
 }
