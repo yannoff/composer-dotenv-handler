@@ -11,6 +11,7 @@ namespace Yannoff\DotenvHandler;
 
 use Composer\IO\IOInterface;
 use Yannoff\DotenvHandler\Component\Env;
+use Yannoff\DotenvHandler\Config\Config;
 
 /**
  * Class Processor
@@ -32,12 +33,12 @@ class Processor
     }
 
     /**
-     * @param array $config
+     * @param Config $config
      */
-    public function processFile(array $config)
+    public function processFile(Config $config)
     {
-        $realFile = $config['file'];
-        $distFile = $config['dist-file'];
+        $realFile = $config->getRealFile();
+        $distFile = $config->getDistFile();
 
         $exists = is_file($realFile);
 
@@ -68,15 +69,15 @@ class Processor
     }
 
     /**
-     * @param array $config
-     * @param array $expectedParams
-     * @param array $actualParams
+     * @param Config $config
+     * @param array  $expectedParams
+     * @param array  $actualParams
      *
      * @return array
      */
-    private function processParams(array $config, array $expectedParams, array $actualParams)
+    private function processParams(Config $config, array $expectedParams, array $actualParams)
     {
-        $keepOutdatedParams = (boolean) $config['keep-outdated'];
+        $keepOutdatedParams = $config->keepOutdated();
 
         if (!$keepOutdatedParams) {
             $actualParams = array_intersect_key($actualParams, $expectedParams);
