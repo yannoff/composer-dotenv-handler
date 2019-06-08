@@ -1,4 +1,4 @@
-# yannoff/dotenv-handler
+# yannoff/composer-dotenv-handler
 
 [![Latest Stable Version](https://poser.pugx.org/yannoff/composer-dotenv-handler/v/stable)](https://packagist.org/packages/yannoff/composer-dotenv-handler)
 [![Total Downloads](https://poser.pugx.org/yannoff/composer-dotenv-handler/downloads)](https://packagist.org/packages/yannoff/composer-dotenv-handler)
@@ -40,7 +40,11 @@ Options may be passed via the `extra` section of the composer.json :
 ### Available options
 
 |**Name**     |**Default value**|**Description**
-|:-----------:|:---------------:|:--------------:
+|-----------|---------------|--------------
 |file         | .env            |The name of the auto-generated *dotenv* file
-|dist-file    | .env.dist       |The name of the *dist* file
+|dist-file    | .env.dist       |The name of the template file (the *dist* file)
 |keep-outdated| true            |Keep values in the *env file* that are not anymore in the *dist file*
+
+## Licence
+
+Licensed under the [MIT Licence](LICENSE).
