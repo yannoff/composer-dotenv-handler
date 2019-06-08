@@ -10,6 +10,7 @@
 namespace Yannoff\DotenvHandler;
 
 use Composer\Script\Event;
+use Yannoff\DotenvHandler\Config\ConfigFactory;
 
 /**
  * Class ScriptHandler
@@ -22,7 +23,7 @@ class ScriptHandler
     const EXTRA_CONFIG_KEY = 'yannoff-dotenv-handler';
 
     /**
-     * Main entry point of the script, hte method called by composer
+     * Main entry point of the script, the method called by composer
      *
      * @param Event $event
      */
@@ -32,23 +33,9 @@ class ScriptHandler
 
         $processor = new Processor($event->getIO());
 
-        $config = array_merge(self::getDefaults(), self::extractConfig($extras));
+        $config = ConfigFactory::create(self::extractConfig($extras));
 
         $processor->processFile($config);
-    }
-
-    /**
-     * Provide default config values
-     *
-     * @return array
-     */
-    protected static function getDefaults()
-    {
-        return [
-            'file' => '.env',
-            'dist-file' => '.env.dist',
-            'keep-outdated' => true,
-        ];
     }
 
     /**
