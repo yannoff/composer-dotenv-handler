@@ -67,10 +67,28 @@ class Env
     public static function dump(array $data) : string
     {
         $buffer = [];
+
         foreach ($data as $var => $val) {
+            // JSON strings loose their wrapping quotes in the process, need to put them back afterward
+            // @see https://github.com/yannoff/composer-dotenv-handler/issues/6
+            if (self::isJsonValue($val)) {
+                $val = sprintf("'%s'", $val);
+            }
             $buffer[] = sprintf('%s=%s', $var, $val);
         }
 
         return implode("\n", $buffer);
+    }
+
+    /**
+     * Check whether the string is a JSON representation
+     *
+     * @param string $value
+     *
+     * @return bool
+     */
+    protected static function isJsonValue($value)
+    {
+        return is_array(json_decode($value, true));
     }
 }
