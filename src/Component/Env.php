@@ -48,7 +48,7 @@ class Env
      *
      * @throws FormatException when a file has a syntax error
      */
-    public static function parse($data, $path = '.env'): array
+    public static function parse($data, $path = '.env')
     {
         if (!is_string($data)) {
             $data = implode("\n", $data);
@@ -64,7 +64,7 @@ class Env
      *
      * @return string
      */
-    public static function dump(array $data) : string
+    public static function dump(array $data)
     {
         $buffer = [];
 

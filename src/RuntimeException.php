@@ -22,7 +22,7 @@ class RuntimeException extends \RuntimeException
      * @param string $format The raw message or format string
      * @param mixed  ...$arg The optional arguments to build the formatted string
      */
-    public function __construct(string $format = "", ...$arg)
+    public function __construct($format = "", ...$arg)
     {
         $arguments = func_get_args();
         $message = call_user_func_array('sprintf', $arguments);
