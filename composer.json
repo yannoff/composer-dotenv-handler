@@ -15,7 +15,7 @@
         "symfony/dotenv": ">=3.4"
     },
     "require-dev": {
-        "composer/composer": "^1.10.22 || ^2.0.13",
+        "composer/composer": "^1.10.23 || ^2.1.9",
         "symfony/filesystem": "^2.3 || ^3 || ^4"
     },
     "autoload": {
